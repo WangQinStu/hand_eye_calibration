@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="24.11.2.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* Hand-Eye Calibration: Camera attached to robot tool (Moving Camera)</c>
+<c>* the camera is attached to the robot tool and the calibration object is stationary with respect to the robot. The robot positions the</c>
+<c></c>
+<c>* In this case, the goal of the hand eye calibration is to determine two unknown poses:</c>
+<c>* - the pose of the robot base in the coordinate system of the calibration object (CalObjInBasePose).</c>
+<c>* - the pose of the camera in the coordinate system of the tool center point (ToolInCamPose).</c>
+<c></c>
+<l>dev_update_off ()</l>
+<c></c>
+<c>* ==================== 文件路径配置 ====================</c>
+<l>BaseDir := '/home/qin/learnspace/opencv-python/halcon_handeye_calib'</l>
+<l>ImageDir := BaseDir + '/images'</l>
+<l>PoseDir := BaseDir + '/tcp_in_base_poses'</l>
+<l>ResultDir := BaseDir + '/result'</l>
+<c></c>
+<c>* 图像文件名格式：img_01.png, ...</c>
+<l>ImageNameStart := ImageDir + '/img_'</l>
+<c>* 位姿文件名格式：pose_01.dat, ...</c>
+<l>DataNameStart := PoseDir + '/pose_'</l>
+<c>* 图像数量</c>
+<l>NumImages := 21</l>
+<c>* 标定板描述文件</c>
+<l>CalTabFile := BaseDir + '/my_caltab_40.descr'</l>
+<c>* 相机参数文件</c>
+<l>CamParFile := BaseDir + '/start_campar.dat'</l>
+<c></c>
+<c>* ==================== 初始化显示窗口 ====================</c>
+<l>read_image (Image, ImageNameStart + '01.png')</l>
+<l>dev_close_window ()</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (Image)</l>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<c></c>
+<c>* 3D可视化参数</c>
+<l>ParamName := ['color_0', 'color_1', 'color_2', 'color_3', 'color_4', 'color_5', 'color_6', 'alpha_6']</l>
+<l>ParamValue := ['red', 'green', 'blue', 'red', 'green', 'blue', 'white', 0.7]</l>
+<c></c>
+<c>* 3D模型标签</c>
+<l>tuple_gen_const (7, '', Labels)</l>
+<l>Labels[0] := 'Robot\'s Tool'</l>
+<l>Labels[3] := 'Robot\'s Base'</l>
+<l>Instructions[0] := 'Rotate: Left button'</l>
+<l>Instructions[1] := 'Zoom:   Shift + left button'</l>
+<l>Instructions[2] := 'Move:   Ctrl  + left button'</l>
+<c></c>
+<c>* 3D可视化尺寸 [m]</c>
+<l>ArrowThickness := 0.005</l>
+<l>ArrowLength := 0.05</l>
+<l>gen_robot_tool_and_base_object_model_3d (ArrowThickness, ArrowLength, OM3DToolOrigin, OM3DBase)</l>
+<c></c>
+<c>* 读取相机参数</c>
+<l>read_cam_par (CamParFile, StartCamParam)</l>
+<c></c>
+<c>* ==================== 创建标定数据模型 ====================</c>
+<c>* 'hand_eye_moving_cam' 表示相机随机械臂移动</c>
+<l>create_calib_data ('hand_eye_moving_cam', 1, 1, CalibDataID)</l>
+<c>* 设置相机参数</c>
+<l>set_calib_data_cam_param (CalibDataID, 0, [], StartCamParam)</l>
+<c>* 设置标定板参数</c>
+<l>set_calib_data_calib_object (CalibDataID, 0, CalTabFile)</l>
+<c>* 设置优化方法</c>
+<l>set_calib_data (CalibDataID, 'model', 'general', 'optimization_method', 'nonlinear')</l>
+<c></c>
+<l>disp_message (WindowHandle, 'The calibration data model was created', 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c></c>
+<c>* ==================== 打开3D可视化窗口 ====================</c>
+<l>dev_open_window (0, Width + 10, Width, Height, 'black', WindowHandleR)</l>
+<l>set_display_font (WindowHandleR, 14, 'mono', 'true', 'false')</l>
+<c></c>
+<c>* ==================== 处理所有标定图像 ====================</c>
+<l>for I := 1 to NumImages by 1</l>
+<l>    dev_set_window (WindowHandle)</l>
+<l>    dev_clear_window ()</l>
+<c>    * 读取图像（修改为.png格式）</c>
+<l>    read_image (Image, ImageNameStart + I$'02d' + '.png')</l>
+<l>    dev_display (Image)</l>
+<c>    * 查找标定板并提取特征</c>
+<l>    find_calib_object (Image, CalibDataID, 0, 0, I - 1, [], [])</l>
+<c>    * 获取标定板轮廓</c>
+<l>    get_calib_data_observ_contours (Caltab, CalibDataID, 'caltab', 0, 0, I - 1)</l>
+<c>    * 获取标定板特征点和位姿</c>
+<l>    get_calib_data_observ_points (CalibDataID, 0, 0, I - 1, RCoord, CCoord, Index, PoseForCalibrationPlate)</l>
+<c>    * 可视化标定板和特征点</c>
+<l>    dev_set_color ('green')</l>
+<l>    dev_display (Image)</l>
+<l>    dev_display (Caltab)</l>
+<l>    dev_set_color ('yellow')</l>
+<l>    disp_cross (WindowHandle, RCoord, CCoord, 6, 0)</l>
+<c>    * 显示标定板坐标系</c>
+<l>    dev_set_colored (3)</l>
+<l>    disp_3d_coord_system (WindowHandle, StartCamParam, PoseForCalibrationPlate, 0.01)</l>
+<l>    disp_message (WindowHandle, 'Extracting data from calibration image ' + I + ' of ' + NumImages, 'window', 12, 12, 'black', 'true')</l>
+<c>    </c>
+<c>    * 读取工具在机器人基座坐标系中的位姿</c>
+<l>    read_pose (DataNameStart + I$'02d' + '.dat', ToolInBasePose)</l>
+<c>    </c>
+<c>    * ==================== 3D可视化机器人姿态 ====================</c>
+<l>    if (I == 1)</l>
+<l>        PoseIn := [-0.006, -0.296, 12, 178, 2, 270, 0]</l>
+<l>    else</l>
+<l>        PoseIn := PoseOut</l>
+<l>    endif</l>
+<c>    </c>
+<c>    * 将工具坐标系转换到基座坐标系</c>
+<l>    rigid_trans_object_model_3d (OM3DToolOrigin, ToolInBasePose, OM3DTool)</l>
+<c>    </c>
+<c>    * 可视化工具和基座</c>
+<l>    visualize_object_model_3d (WindowHandleR, [OM3DTool,OM3DBase], [], PoseIn, ParamName, ParamValue, 'Position of robot tool coordinate system in robot base coordinate system', Labels, Instructions, PoseOut)</l>
+<c>    </c>
+<l>    clear_object_model_3d (OM3DTool)</l>
+<c>    </c>
+<c>    * ==================== 保存位姿到标定数据模型 ====================</c>
+<l>    set_calib_data (CalibDataID, 'tool', I - 1, 'tool_in_base_pose', ToolInBasePose)</l>
+<l>endfor</l>
+<c></c>
+<c>* 关闭3D窗口</c>
+<l>dev_set_window (WindowHandleR)</l>
+<l>dev_close_window ()</l>
+<c></c>
+<l>disp_message (WindowHandle, 'All relevant data has been set in the calibration data model', 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c></c>
+<c>* ==================== 检查输入位姿一致性 ====================</c>
+<l>check_hand_eye_calibration_input_poses (CalibDataID, 0.05, 0.005, Warnings)</l>
+<l>if (|Warnings| != 0)</l>
+<c>    * 检测到位姿一致性问题</c>
+<l>    dev_inspect_ctrl (Warnings)</l>
+<l>    disp_message (WindowHandle, 'Warning: Pose consistency issues detected!', 'window', 12, 12, 'red', 'true')</l>
+<l>    stop ()</l>
+<l>endif</l>
+<c></c>
+<c>* ==================== 执行手眼标定 ====================</c>
+<c>* 标定会自动进行相机内参标定</c>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowHandle, 'Performing the hand-eye calibration...', 'window', 12, 12, 'black', 'true')</l>
+<c></c>
+<l>calibrate_hand_eye (CalibDataID, Errors)</l>
+<c></c>
+<c>* ==================== 获取标定结果 ====================</c>
+<c>* ==================== 获取标定结果 ====================</c>
+<c>* 相机标定误差</c>
+<l>get_calib_data (CalibDataID, 'model', 'general', 'camera_calib_error', CamCalibError)</l>
+<c></c>
+<c>* 优化后的相机参数</c>
+<l>get_calib_data (CalibDataID, 'camera', 0, 'params', CamParam)</l>
+<c></c>
+<c>* 手眼标定结果：工具在相机坐标系中的位姿（HALCON返回值）</c>
+<l>get_calib_data (CalibDataID, 'camera', 0, 'tool_in_cam_pose', ToolInCamPose)</l>
+<c></c>
+<c>* 求逆得到：相机在工具坐标系中的位姿（实际应用需要的）</c>
+<l>pose_invert (ToolInCamPose, CamInToolPose)</l>
+<c></c>
+<c>* 标定板在机器人基座坐标系中的位姿</c>
+<l>get_calib_data (CalibDataID, 'calib_obj', 0, 'obj_in_base_pose', CalObjInBasePose)</l>
+<c></c>
+<c>* 考虑标定板厚度（5mm）后的平面位姿</c>
+<l>set_origin_pose (CalObjInBasePose, 0, 0, 0.005, PlaneInBasePose)</l>
+<c></c>
+<c>* ==================== 保存标定结果 ====================</c>
+<l>try</l>
+<c>    * 保存相机参数</c>
+<l>    write_cam_par (CamParam, ResultDir + '/final_campar.dat')</l>
+<c>    </c>
+<c>    * 保存两种手眼标定位姿</c>
+<l>    write_pose (ToolInCamPose, ResultDir + '/final_pose_tool_in_cam.dat')</l>
+<l>    write_pose (CamInToolPose, ResultDir + '/final_pose_cam_in_tool.dat')</l>
+<l>    write_pose (CalObjInBasePose, ResultDir + '/final_pose_base_calplate.dat')</l>
+<l>    write_pose (PlaneInBasePose, ResultDir + '/final_pose_base_plane.dat')</l>
+<c>    </c>
+<c>    * 获取Order类型</c>
+<l>    Order := CamInToolPose[6]</l>
+<c>    </c>
+<c>    * 保存易读的文本格式</c>
+<l>    open_file(ResultDir + '/calibration_results.txt', 'output', FileHandle)</l>
+<l>    fwrite_string(FileHandle, 'Hand-Eye Calibration Results\n')</l>
+<l>    fwrite_string(FileHandle, '================================\n\n')</l>
+<l>    fwrite_string(FileHandle, 'Camera Calibration Error: ' + CamCalibError$'.4f' + ' pixels\n\n')</l>
+<l>    fwrite_string(FileHandle, 'Hand-Eye Errors:\n')</l>
+<l>    fwrite_string(FileHandle, 'Translation RMS: ' + (Errors[0] * 1000)$'5.3f' + ' mm\n')</l>
+<l>    fwrite_string(FileHandle, 'Rotation RMS: ' + Errors[1]$'5.3f' + ' deg\n')</l>
+<l>    fwrite_string(FileHandle, 'Translation Max: ' + (Errors[2] * 1000)$'5.3f' + ' mm\n')</l>
+<l>    fwrite_string(FileHandle, 'Rotation Max: ' + Errors[3]$'5.3f' + ' deg\n\n')</l>
+<c>    </c>
+<l>    fwrite_string(FileHandle, '========================================\n')</l>
+<l>    fwrite_string(FileHandle, 'Euler Angle Definition:\n')</l>
+<l>    fwrite_string(FileHandle, '========================================\n')</l>
+<l>    fwrite_string(FileHandle, 'Order Type: ' + Order + '\n')</l>
+<l>    if (Order == 0)</l>
+<l>        fwrite_string(FileHandle, 'Rotation Mode: gba (Yaw-Pitch-Roll)\n')</l>
+<l>        fwrite_string(FileHandle, 'Extrinsic (Fixed Axis): Z -&gt; Y -&gt; X\n')</l>
+<l>        fwrite_string(FileHandle, 'Intrinsic (Moving Axis): X -&gt; Y\' -&gt; Z\'\'\n\n')</l>
+<l>    elseif (Order == 2)</l>
+<l>        fwrite_string(FileHandle, 'Rotation Mode: abg\n')</l>
+<l>        fwrite_string(FileHandle, 'Extrinsic (Fixed Axis): X -&gt; Y -&gt; Z\n')</l>
+<l>        fwrite_string(FileHandle, 'Intrinsic (Moving Axis): Z -&gt; Y\' -&gt; X\'\'\n\n')</l>
+<l>    endif</l>
+<c>    </c>
+<l>    fwrite_string(FileHandle, '========================================\n')</l>
+<l>    fwrite_string(FileHandle, 'CamInToolPose (Camera in Tool coordinate system - FOR ROBOT APPLICATION):\n')</l>
+<l>    fwrite_string(FileHandle, '========================================\n')</l>
+<l>    fwrite_string(FileHandle, 'X: ' + CamInToolPose[0]$'.6f' + ' m  (' + (CamInToolPose[0]*1000)$'.1f' + ' mm)\n')</l>
+<l>    fwrite_string(FileHandle, 'Y: ' + CamInToolPose[1]$'.6f' + ' m  (' + (CamInToolPose[1]*1000)$'.1f' + ' mm)\n')</l>
+<l>    fwrite_string(FileHandle, 'Z: ' + CamInToolPose[2]$'.6f' + ' m  (' + (CamInToolPose[2]*1000)$'.1f' + ' mm)\n')</l>
+<l>    fwrite_string(FileHandle, 'Rx: ' + CamInToolPose[3]$'.4f' + ' deg\n')</l>
+<l>    fwrite_string(FileHandle, 'Ry: ' + CamInToolPose[4]$'.4f' + ' deg\n')</l>
+<l>    fwrite_string(FileHandle, 'Rz: ' + CamInToolPose[5]$'.4f' + ' deg\n')</l>
+<l>    fwrite_string(FileHandle, 'Order: ' + Order + '\n\n')</l>
+<c>    </c>
+<c>    * ... 其他保存内容 ...</c>
+<c>    </c>
+<l>    close_file(FileHandle)</l>
+<l>catch (Exception)</l>
+<c>    * 写入失败（可能权限问题）</c>
+<l>endtry</l>
+<c></c>
+<c>* ==================== 显示标定误差 ====================</c>
+<l>dev_display (Image)</l>
+<l>disp_results (WindowHandle, CamCalibError, Errors)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c></c>
+<c>* ==================== 验证标定结果 ====================</c>
+<c>* 获取观测索引</c>
+<l>query_calib_data_observ_indices (CalibDataID, 'camera', 0, CalibObjIdx, PoseIds)</l>
+<c></c>
+<c>* 设置3D可视化参数</c>
+<l>CameraSize := 0.05</l>
+<l>CameraConeLength := 0.3</l>
+<c></c>
+<c>* 获取标定板的3D点云</c>
+<l>get_calib_data (CalibDataID, 'calib_obj', 0, 'x', PX)</l>
+<l>get_calib_data (CalibDataID, 'calib_obj', 0, 'y', PY)</l>
+<l>get_calib_data (CalibDataID, 'calib_obj', 0, 'z', PZ)</l>
+<l>gen_object_model_3d_from_points (PX, PY, PZ, OM3DObjectOrig)</l>
+<l>rigid_trans_object_model_3d (OM3DObjectOrig, CalObjInBasePose, OM3DObject)</l>
+<l>clear_object_model_3d (OM3DObjectOrig)</l>
+<c></c>
+<c>* 打开3D验证窗口</c>
+<l>dev_open_window (0, Width + 10, Width, Height, 'black', WindowHandleR)</l>
+<l>set_display_font (WindowHandleR, 14, 'mono', 'true', 'false')</l>
+<c></c>
+<c>* 扩展可视化参数（包含相机和标定板）</c>
+<l>ParamName := ['color_0', 'color_1', 'color_2', 'color_3', 'color_4', 'color_5', 'color_6', 'color_7', 'alpha_7', 'color_8', 'color_9', 'color_10', 'alpha_8', 'alpha_9', 'alpha_10', 'point_size']</l>
+<l>ParamValue := ['red', 'red', 'green', 'blue', 'red', 'green', 'blue', 'white', 0.7, 'magenta', 'yellow', 'white', 0.5, 0.5, 0.5, 5]</l>
+<c></c>
+<c>* 3D模型标签</c>
+<l>tuple_gen_const (11, '', Labels)</l>
+<l>Labels[0] := 'Calibration Object'</l>
+<l>Labels[1] := 'Robot\'s Tool'</l>
+<l>Labels[4] := 'Robot\'s Base'</l>
+<l>Labels[8] := 'Camera'</l>
+<c></c>
+<c>* ==================== 验证每张图像 ====================</c>
+<l>for I := 1 to NumImages by 1</l>
+<l>    dev_set_window (WindowHandle)</l>
+<l>    dev_clear_window ()</l>
+<c>    </c>
+<c>    * 读取图像</c>
+<l>    read_image (Image, ImageNameStart + I$'02d' + '.png')</l>
+<l>    dev_display (Image)</l>
+<c>    </c>
+<c>    * 获取该图像对应的机器人位姿</c>
+<l>    get_calib_data (CalibDataID, 'tool', PoseIds[I-1], 'tool_in_base_pose', ToolInBasePose)</l>
+<c>    </c>
+<c>    * 计算标定板在相机坐标系中的位姿</c>
+<l>    calc_calplate_pose_movingcam (CalObjInBasePose, ToolInCamPose, ToolInBasePose, CalObjInCamPose)</l>
+<c>    </c>
+<c>    * 显示重投影的坐标系</c>
+<l>    dev_set_colored (3)</l>
+<l>    disp_3d_coord_system (WindowHandle, CamParam, CalObjInCamPose, 0.01)</l>
+<c>    </c>
+<l>    Message := 'Using the calibration results to display '</l>
+<l>    Message[1] := 'the coordinate system in image ' + (I + 1) + ' of ' + NumImages</l>
+<l>    disp_message (WindowHandle, Message, 'window', 12, 12, 'black', 'true')</l>
+<c>    </c>
+<c>    * 生成相机和工具的3D模型</c>
+<l>    gen_camera_and_tool_moving_cam_object_model_3d (ToolInCamPose, ToolInBasePose, CameraSize, CameraConeLength, OM3DToolOrigin, CamParam, OM3DCamera, OM3DTool)</l>
+<c>    </c>
+<c>    * 3D可视化</c>
+<l>    if (I == 0)</l>
+<l>        PoseIn := [-0.006, -0.296, 12, 178, 2, 270, 0]</l>
+<l>    else</l>
+<l>        PoseIn := PoseOut</l>
+<l>    endif</l>
+<c>    </c>
+<l>    visualize_object_model_3d (WindowHandleR, [OM3DObject,OM3DTool,OM3DBase,OM3DCamera], [], PoseIn, ParamName, ParamValue, [], Labels, Instructions, PoseOut)</l>
+<c>    </c>
+<l>    clear_object_model_3d (OM3DTool)</l>
+<l>    clear_object_model_3d (OM3DCamera)</l>
+<l>endfor</l>
+<c></c>
+<c>* ==================== 清理资源 ====================</c>
+<l>clear_calib_data (CalibDataID)</l>
+<l>clear_object_model_3d (OM3DObject)</l>
+<l>clear_object_model_3d (OM3DToolOrigin)</l>
+<l>clear_object_model_3d (OM3DBase)</l>
+<l>dev_set_window (WindowHandleR)</l>
+<l>dev_close_window ()</l>
+<c></c>
+<c>* ==================== 应用示例 ====================</c>
+<c>* </c>
+<c>* 手眼标定完成后，ToolInCamPose 可用于机器人抓取应用</c>
+<c>* </c>
+<c>* 要让机器人抓取物体，通常需要：</c>
+<c>* 1. 通过相机检测物体，得到 ObjInCamPose（物体在相机坐标系中的位姿）</c>
+<c>* 2. 转换到机器人基座坐标系</c>
+<c></c>
+<c>* 这里用标定板位姿模拟检测到的物体</c>
+<l>ObjInCamPose := CalObjInCamPose</l>
+<c></c>
+<c>* 计算物体在机器人基座坐标系中的位姿</c>
+<c>* 步骤：Camera -&gt; Tool -&gt; Base</c>
+<l>pose_invert (ToolInCamPose, CamInToolPose)</l>
+<l>pose_compose (ToolInBasePose, CamInToolPose, CamInBasePose)</l>
+<l>pose_compose (CamInBasePose, ObjInCamPose, ObjInBasePose)</l>
+<c></c>
+<c>* 快速验证Order类型</c>
+<l>Order := CamInToolPose[6]</l>
+<l>disp_message (WindowHandle, 'Pose Order: ' + Order + ' (0=gba, 2=abg)', 'window', 350, 12, 'green', 'true')</l>
+<c></c>
+<c>* 现在 ObjInBasePose 就是物体在机器人基座坐标系中的位姿</c>
+<c>* 可以用它来规划机器人的抓取动作</c>
+<c></c>
+<c>* 显示最终结果</c>
+<l>dev_set_window (WindowHandle)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (Image)</l>
+<l>FinalMsg := 'Calibration Complete!'</l>
+<l>FinalMsg[1] := 'Results saved to: ' + ResultDir</l>
+<l>FinalMsg[2] := ' '</l>
+<l>FinalMsg[3] := 'Camera Error: ' + CamCalibError$'.4f' + ' px'</l>
+<l>FinalMsg[4] := 'Trans RMS: ' + (Errors[0] * 1000)$'.2f' + ' mm'</l>
+<l>FinalMsg[5] := 'Rot RMS: ' + Errors[1]$'.2f' + ' deg'</l>
+<l>disp_message (WindowHandle, FinalMsg, 'window', 12, 12, 'black', 'true')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="calc_calplate_pose_movingcam">
+<interface>
+<ic>
+<par name="CalibObjInBasePose" base_type="ctrl" dimension="0"/>
+<par name="ToolInCamPose" base_type="ctrl" dimension="0"/>
+<par name="ToolInBasePose" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="CalibObjInCamPose" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>* CalibObjInCamPose = cam_H_calplate</c>
+<c>*                   = cam_H_tool * tool_H_base * base_H_calplate</c>
+<c>*                   = ToolInCamPose * BaseInToolPose * CalibrationPose</c>
+<l>pose_invert (ToolInBasePose, BaseInToolPose)</l>
+<l>pose_compose (ToolInCamPose, BaseInToolPose, BaseInCamPose)</l>
+<l>pose_compose (BaseInCamPose, CalibObjInBasePose, CalibObjInCamPose)</l>
+<l>return ()</l>
+</body>
+<docu id="calc_calplate_pose_movingcam">
+<short lang="en_US">compute cam_H_calplate from hand-eye calibration results</short>
+<parameters>
+<parameter id="CalibObjInBasePose"/>
+<parameter id="CalibObjInCamPose"/>
+<parameter id="ToolInBasePose"/>
+<parameter id="ToolInCamPose"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="disp_results">
+<interface>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+<par name="CamCalibError" base_type="ctrl" dimension="0"/>
+<par name="Errors" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>dev_clear_window ()</l>
+<l>Message := 'Quality of the results:'</l>
+<l>disp_message (WindowHandle, Message, 'window', 12, 12, 'black', 'true')</l>
+<l>Message := 'Error of the camera calibration:      ' + CamCalibError$'6.4f' + ' pixel'</l>
+<l>disp_message (WindowHandle, Message, 'window', 52, 12, 'black', 'true')</l>
+<l>Message := 'Errors of the hand eye calibration:'</l>
+<l>disp_message (WindowHandle, Message, 'window', 92, 12, 'black', 'true')</l>
+<l>DispErrors := []</l>
+<l>DispErrors := [DispErrors,'                     |   RMS    |  Maximum |']</l>
+<l>DispErrors := [DispErrors,'|--------------------+----------+----------|']</l>
+<l>DispErrors := [DispErrors,'| Translational part | ' + (Errors[0] * 1e3)$'5.3f' + ' mm | ' + (Errors[2] * 1e3)$'5.3f' + ' mm |']</l>
+<l>DispErrors := [DispErrors,'| Rotational part    | ' + Errors[1]$'5.3f' + ' °  | ' + Errors[3]$'5.3f' + ' °  |']</l>
+<l>disp_message (WindowHandle, DispErrors, 'window', 132, 40, 'black', 'true')</l>
+<l>return ()</l>
+</body>
+<docu id="disp_results">
+<parameters>
+<parameter id="CamCalibError"/>
+<parameter id="Errors"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

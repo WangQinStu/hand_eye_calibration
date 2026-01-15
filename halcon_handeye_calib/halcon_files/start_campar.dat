@@ -1,0 +1,74 @@
+#
+# INTERNAL CAMERA PARAMETERS
+# RealSense D405 Camera
+# Distortion Model: inverse_brown_conrady (polynomial)
+# Based on actual sensor specifications
+#
+
+# ===== generic parameter syntax ==========================================
+#
+# Syntax:      ParGroup: <pargroupname>;
+#                        <pargroup_description>;
+#
+#               <name> : <shortname> : <default_value>;
+#                        <type> : <lower_bound> : <upper_bound>;
+#                        <description>;
+#
+#                [ <type> ::= BOOL|XBOOL|INT|FLOAT|DOUBLE|STRING ]
+#
+# =========================================================================
+
+
+
+##############################################################################
+#
+#  Camera : Parameter
+#    >  Focus
+#    >  Kappa
+#    >  K2
+#    >  K3
+#    >  P1
+#    >  P2
+#    >  Sx
+#    >  Sy
+#    >  Cx
+#    >  Cy
+#    >  ImageWidth
+#    >  ImageHeight
+#
+##############################################################################
+
+ParGroup: Camera: Parameter;
+	"Internal camera parameters - RealSense D405";
+
+Focus:foc:	1.50300000e-003;
+	DOUBLE:0.0:;
+	"Focal length of the lens [meter]";
+
+Kappa:kappa:	-5.24568818e-002;
+	DOUBLE::;
+	"Radial distortion coefficient K1 [dimensionless]";
+
+Sx:sx:	3.45000000e-006;
+	DOUBLE:0.0:;
+	"Width of a cell on the sensor [meter]";
+
+Sy:sy:	3.45000000e-006;
+	DOUBLE:0.0:;
+	"Height of a cell on the sensor [meter]";
+
+Cx:cx:	4.28217468e+002;
+	DOUBLE:0.0:;
+	"X-coordinate of the image center [pixel]";
+
+Cy:cy:	2.42861115e+002;
+	DOUBLE:0.0:;
+	"Y-coordinate of the image center [pixel]";
+
+ImageWidth:imgw:	848;
+	INT:0:2048;
+	"Width of the images [pixel]";
+
+ImageHeight:imgh:	480;
+	INT:0:2048;
+	"Height of the images [pixel]";
