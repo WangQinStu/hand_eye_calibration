@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ed8e7099-8cdc-4693-8a9e-45520a37044f" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/11.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/data/pose.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_00.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_02.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_03.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_04.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_05.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_06.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_07.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_08.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_09.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_10.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_11.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_12.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_14.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_15.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_16.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_17.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_18.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_19.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_20.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_ChArUco/camera_intrinsics.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_ChArUco/charuco.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_ChArUco/pose.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_ChArUco/pose1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/eyeInHand.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images/poses.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/robotToolPose.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/test1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/手眼标定使用说明.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/result_analys.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/valid_A.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eyeInHand_calibration/valid_B.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/AGENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capture_img.py" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/capture_img.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/halcon_files/my_caltab_40.descr" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/my_caltab_40.descr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/halcon_files/my_movingcam_calibration.hdev" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/my_movingcam_calibration.hdev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/halcon_files/start_campar.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/start_campar.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/halcon_files/test2_000.hdev" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/test2_000.hdev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_09.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/calibration_results.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/final_campar.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/final_pose_base_calplate.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/final_pose_base_plane.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/final_pose_cam_in_tool.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result/final_pose_tool_in_cam.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/oo.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_01.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_01.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_02.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_03.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_04.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_05.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_06.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_07.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_08.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_09.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_10.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_11.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_12.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_13.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses/pose_13.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_14.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_15.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_16.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_17.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_18.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_19.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_20.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_in_base_poses/pose_21.dat" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;WangQinStu&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:WangQinStu/hand_eye_calibration.git&quot;,
+    &quot;accountId&quot;: &quot;2bc8b25e-f403-4923-81f2-9080a91c3abe&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/opencv_handeye_calib/pose1.json" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="38JoPNnQCHfSdhLx5zyPjrdoKGE" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.11.executor": "Run",
+    "Python.capture_img (1).executor": "Run",
+    "Python.capture_img.executor": "Run",
+    "Python.charuco.executor": "Run",
+    "Python.eyeInHand (1).executor": "Run",
+    "Python.eyeInHand.executor": "Run",
+    "Python.opencv_handeye_calib.executor": "Run",
+    "Python.result_analys.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.test1.executor": "Run",
+    "Python.test_angle.executor": "Run",
+    "Python.valid_A.executor": "Run",
+    "Python.valid_B.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/qin/workspace/hand_eye_calibration/hand_eye_calibration/eyeInHand_calibration/opencv_chessboard/images"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/images" />
+      <recent name="$PROJECT_DIR$/../eyeInHand_calibration/halcon/poses" />
+      <recent name="$PROJECT_DIR$/opencv_chessboard" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/halcon" />
+      <recent name="$PROJECT_DIR$/opencv_handeye_calib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.valid_A">
+    <configuration name="11" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eyeInHand_calibration" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../eyeInHand_calibration" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../eyeInHand_calibration/11.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="capture_img" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eyeInHand_calibration" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../eyeInHand_calibration" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../eyeInHand_calibration/capture_img.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="eyeInHand" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eyeInHand_calibration" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../eyeInHand_calibration/opencv_chessboard/eyeInHand.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eyeInHand_calibration" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../eyeInHand_calibration" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../eyeInHand_calibration/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="valid_A" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="eyeInHand_calibration" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../eyeInHand_calibration" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../eyeInHand_calibration/valid_A.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.valid_A" />
+        <item itemvalue="Python.eyeInHand" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.capture_img" />
+        <item itemvalue="Python.11" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-4e2b1448bda8-9a97661f3031-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.27397.106" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="ed8e7099-8cdc-4693-8a9e-45520a37044f" name="更改" comment="" />
+      <created>1768527009777</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768527009777</updated>
+    </task>
+    <servers />
+  </component>
+</project>
