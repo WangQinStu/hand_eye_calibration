@@ -13,13 +13,13 @@
 <l>dev_update_off ()</l>
 <c></c>
 <c>* ==================== 文件路径配置 ====================</c>
-<l>BaseDir := '/home/qin/learnspace/opencv-python/halcon_handeye_calib'</l>
+<l>BaseDir := '/home/qin/workspace/hand_eye_calibration/hand_eye_calibration/eyeInHand_calibration/halcon'</l>
 <l>ImageDir := BaseDir + '/images'</l>
-<l>PoseDir := BaseDir + '/tcp_in_base_poses'</l>
+<l>PoseDir := BaseDir + '/poses'</l>
 <l>ResultDir := BaseDir + '/result'</l>
 <c></c>
 <c>* 图像文件名格式：img_01.png, ...</c>
-<l>ImageNameStart := ImageDir + '/img_'</l>
+<l>ImageNameStart := ImageDir + '/'</l>
 <c>* 位姿文件名格式：pose_01.dat, ...</c>
 <l>DataNameStart := PoseDir + '/pose_'</l>
 <c>* 图像数量</c>
@@ -30,7 +30,7 @@
 <l>CamParFile := BaseDir + '/start_campar.dat'</l>
 <c></c>
 <c>* ==================== 初始化显示窗口 ====================</c>
-<l>read_image (Image, ImageNameStart + '01.png')</l>
+<l>read_image (Image, ImageNameStart + '00.png')</l>
 <l>dev_close_window ()</l>
 <l>get_image_size (Image, Width, Height)</l>
 <l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
@@ -78,18 +78,18 @@
 <l>set_display_font (WindowHandleR, 14, 'mono', 'true', 'false')</l>
 <c></c>
 <c>* ==================== 处理所有标定图像 ====================</c>
-<l>for I := 1 to NumImages by 1</l>
+<l>for I := 0 to NumImages-1 by 1</l>
 <l>    dev_set_window (WindowHandle)</l>
 <l>    dev_clear_window ()</l>
 <c>    * 读取图像（修改为.png格式）</c>
 <l>    read_image (Image, ImageNameStart + I$'02d' + '.png')</l>
 <l>    dev_display (Image)</l>
 <c>    * 查找标定板并提取特征</c>
-<l>    find_calib_object (Image, CalibDataID, 0, 0, I - 1, [], [])</l>
+<l>    find_calib_object (Image, CalibDataID, 0, 0, I, [], [])</l>
 <c>    * 获取标定板轮廓</c>
-<l>    get_calib_data_observ_contours (Caltab, CalibDataID, 'caltab', 0, 0, I - 1)</l>
+<l>    get_calib_data_observ_contours (Caltab, CalibDataID, 'caltab', 0, 0, I)</l>
 <c>    * 获取标定板特征点和位姿</c>
-<l>    get_calib_data_observ_points (CalibDataID, 0, 0, I - 1, RCoord, CCoord, Index, PoseForCalibrationPlate)</l>
+<l>    get_calib_data_observ_points (CalibDataID, 0, 0, I, RCoord, CCoord, Index, PoseForCalibrationPlate)</l>
 <c>    * 可视化标定板和特征点</c>
 <l>    dev_set_color ('green')</l>
 <l>    dev_display (Image)</l>
@@ -99,13 +99,13 @@
 <c>    * 显示标定板坐标系</c>
 <l>    dev_set_colored (3)</l>
 <l>    disp_3d_coord_system (WindowHandle, StartCamParam, PoseForCalibrationPlate, 0.01)</l>
-<l>    disp_message (WindowHandle, 'Extracting data from calibration image ' + I + ' of ' + NumImages, 'window', 12, 12, 'black', 'true')</l>
+<l>    disp_message (WindowHandle, 'Extracting data from calibration image ' + (I+1) + ' of ' + NumImages, 'window', 12, 12, 'black', 'true')</l>
 <c>    </c>
 <c>    * 读取工具在机器人基座坐标系中的位姿</c>
-<l>    read_pose (DataNameStart + I$'02d' + '.dat', ToolInBasePose)</l>
+<l>    read_pose (DataNameStart + (I)$'02d' + '.dat', ToolInBasePose)</l>
 <c>    </c>
 <c>    * ==================== 3D可视化机器人姿态 ====================</c>
-<l>    if (I == 1)</l>
+<l>    if (I == 0)</l>
 <l>        PoseIn := [-0.006, -0.296, 12, 178, 2, 270, 0]</l>
 <l>    else</l>
 <l>        PoseIn := PoseOut</l>
@@ -120,7 +120,7 @@
 <l>    clear_object_model_3d (OM3DTool)</l>
 <c>    </c>
 <c>    * ==================== 保存位姿到标定数据模型 ====================</c>
-<l>    set_calib_data (CalibDataID, 'tool', I - 1, 'tool_in_base_pose', ToolInBasePose)</l>
+<l>    set_calib_data (CalibDataID, 'tool', I, 'tool_in_base_pose', ToolInBasePose)</l>
 <l>endfor</l>
 <c></c>
 <c>* 关闭3D窗口</c>
@@ -262,7 +262,7 @@
 <l>Labels[8] := 'Camera'</l>
 <c></c>
 <c>* ==================== 验证每张图像 ====================</c>
-<l>for I := 1 to NumImages by 1</l>
+<l>for I := 0 to NumImages - 1 by 1</l>
 <l>    dev_set_window (WindowHandle)</l>
 <l>    dev_clear_window ()</l>
 <c>    </c>
@@ -271,7 +271,7 @@
 <l>    dev_display (Image)</l>
 <c>    </c>
 <c>    * 获取该图像对应的机器人位姿</c>
-<l>    get_calib_data (CalibDataID, 'tool', PoseIds[I-1], 'tool_in_base_pose', ToolInBasePose)</l>
+<l>    get_calib_data (CalibDataID, 'tool', PoseIds[I], 'tool_in_base_pose', ToolInBasePose)</l>
 <c>    </c>
 <c>    * 计算标定板在相机坐标系中的位姿</c>
 <l>    calc_calplate_pose_movingcam (CalObjInBasePose, ToolInCamPose, ToolInBasePose, CalObjInCamPose)</l>
@@ -299,7 +299,6 @@
 <l>    clear_object_model_3d (OM3DTool)</l>
 <l>    clear_object_model_3d (OM3DCamera)</l>
 <l>endfor</l>
-<c></c>
 <c>* ==================== 清理资源 ====================</c>
 <l>clear_calib_data (CalibDataID)</l>
 <l>clear_object_model_3d (OM3DObject)</l>
